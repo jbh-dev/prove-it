@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prove it sign-ups · JBH</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:"Proxima Nova";font-weight:300;font-style:normal;font-display:swap;src:url(/assets/fonts/ProximaNova-Light.woff2) format("woff2")}
+@font-face{font-family:"Proxima Nova";font-weight:700;font-style:normal;font-display:swap;src:url(/assets/fonts/ProximaNova-Bold.woff2) format("woff2")}
+
+/* One quiet working screen: summary line, toolbar, then the table. */
+:root{
+  --paper:#f7f7f8; --surface:#ffffff; --sunk:#f1f1f3;
+  --ink:#111113; --ink2:#3f3f46; --muted:#6c6c75; --faint:#a6a6ae;
+  --line:#ebebee; --line2:#dcdce1;
+  --pink:#ED4C99; --pink-ink:#c92f7a; --pink-wash:rgba(237,76,153,.07);
+  --bad:#c03535;
+  --font:"Proxima Nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --rb:9px; --r:14px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111013; --surface:#18161b; --sunk:#141216;
+  --ink:#f2eff4; --ink2:#c9c3ce; --muted:#938d98; --faint:#5c5761;
+  --line:#26232a; --line2:#36323b; --pink:#f06aa8; --pink-ink:#f58cbd; --pink-wash:rgba(240,106,168,.09);
+  --bad:#ef6b6b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111013; --surface:#18161b; --sunk:#141216;
+  --ink:#f2eff4; --ink2:#c9c3ce; --muted:#938d98; --faint:#5c5761;
+  --line:#26232a; --line2:#36323b; --pink:#f06aa8; --pink-ink:#f58cbd; --pink-wash:rgba(240,106,168,.09);
+  --bad:#ef6b6b; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:300 15px/1.5 var(--font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,b,strong,th{font-weight:700;font-style:normal}
+h1{margin:0;font-size:28px;letter-spacing:-.02em;line-height:1.15}
+p{margin:0}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--pink);outline-offset:2px;border-radius:6px}
+[hidden]{display:none!important}
+.wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+@media (max-width:640px){.wrap{padding:0 16px}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:var(--rb);border:1px solid var(--line2);background:var(--surface);color:var(--ink);font-weight:700;font-size:14px;cursor:pointer;text-decoration:none;transition:border-color .15s,background .15s;white-space:nowrap}
+.btn:hover{border-color:var(--ink2)}
+.btn.pri{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn svg{width:16px;height:16px}
+.textbtn{background:none;border:0;padding:6px 0;color:var(--muted);font-size:14px;cursor:pointer}
+.textbtn:hover{color:var(--ink)}
+
+.top{background:var(--surface);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.brand .logo{width:48px;display:flex;padding:6px 0}
+.brand .logo svg{width:100%;height:auto}
+.brand span{color:var(--muted);font-size:15px}
+
+/* Sign in */
+.signin{min-height:calc(100vh - 64px);display:grid;place-items:center;padding:48px 16px}
+.signin form{width:100%;max-width:380px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:36px;box-shadow:0 30px 60px -30px rgba(17,17,19,.18)}
+.signin h1{font-size:24px}
+.signin p.sub{margin-top:8px;color:var(--muted)}
+.field{display:block;margin-top:24px}
+.field span{display:block;font-weight:700;font-size:14px;margin-bottom:8px}
+.field input{width:100%;height:46px;padding:0 14px;border-radius:var(--rb);border:1px solid var(--line2);background:var(--paper);font-size:16px}
+.field input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 4px var(--pink-wash)}
+.check{display:flex;align-items:center;gap:10px;margin:16px 0 22px;font-size:14px;color:var(--ink2);cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:18px;height:18px;margin:0;border:1px solid var(--line2);border-radius:5px;background:var(--paper);display:grid;place-items:center;cursor:pointer}
+.check input::after{content:"";width:8px;height:4px;border-left:2px solid var(--pink);border-bottom:2px solid var(--pink);transform:rotate(-45deg) translate(1px,-1px);opacity:0}
+.check input:checked::after{opacity:1}
+.signin .btn{width:100%;height:46px}
+.err{margin-top:12px;color:var(--bad);font-size:14px;text-align:center}
+
+/* Dashboard */
+.dash{padding:40px 0 64px}
+.head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.summary{margin-top:10px;color:var(--muted);font-size:16px}
+.summary b{color:var(--ink);font-variant-numeric:tabular-nums}
+.summary .sep{margin:0 10px;color:var(--faint)}
+.head .actions{display:flex;align-items:center;gap:16px}
+.updated{font-size:13.5px;color:var(--muted);white-space:nowrap}
+.updated i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#2fb47c;margin-right:7px;vertical-align:1px}
+
+.toolbar{display:flex;align-items:center;gap:12px;margin:28px 0 16px;flex-wrap:wrap}
+.search{position:relative;flex:1;min-width:200px;max-width:360px}
+.search svg{position:absolute;left:12px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--faint)}
+.search input{width:100%;height:40px;padding:0 12px 0 36px;border-radius:var(--rb);border:1px solid var(--line2);background:var(--surface);font-size:15px}
+.search input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 4px var(--pink-wash)}
+.tabs{display:flex;gap:2px;padding:3px;border-radius:var(--rb);background:var(--sunk)}
+.tabs button{height:34px;padding:0 14px;border:0;border-radius:7px;background:none;color:var(--muted);font-size:14px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:700;box-shadow:0 1px 2px rgba(17,17,19,.08)}
+.tabs .n{margin-left:6px;color:var(--faint);font-weight:300;font-variant-numeric:tabular-nums}
+
+.table{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+table{width:100%;border-collapse:collapse}
+th,td{text-align:left;padding:14px 20px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:13.5px;color:var(--muted);background:var(--surface);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:var(--paper)}
+td.when{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+td.name{font-weight:700}
+td.email a{text-decoration:none;color:var(--ink2);border-bottom:1px solid var(--line2)}
+td.email a:hover{border-color:var(--pink)}
+td.call{width:1%;white-space:nowrap;text-align:center}
+td.call svg{width:16px;height:16px;color:var(--pink);vertical-align:-3px}
+td.src{color:var(--muted);white-space:nowrap}
+tr.new td.when{color:var(--pink-ink)}
+tr.new td.when::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--pink);margin-right:8px;vertical-align:2px}
+.empty{padding:56px 24px;text-align:center;color:var(--muted)}
+.empty b{display:block;color:var(--ink);font-size:17px;margin-bottom:6px}
+
+@media (max-width:760px){
+  table,thead,tbody,tr,td{display:block}
+  thead{display:none}
+  tbody tr{padding:16px 18px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto;gap:2px 12px}
+  tbody tr:last-child{border-bottom:0}
+  td{padding:0;border:0}
+  td.name{grid-column:1;grid-row:1}
+  td.when{grid-column:2;grid-row:1;font-size:13.5px;text-align:right}
+  td.company{grid-column:1/-1}
+  td.email{grid-column:1/-1;min-width:0;overflow-wrap:anywhere}
+  td.call{grid-column:1/-1;text-align:left;width:auto;font-size:13.5px;color:var(--pink-ink)}
+  td.call:empty{display:none}
+  td.call::after{content:" Wants to talk about GEO support"}
+  td.call:empty::after{content:none}
+  td.src{grid-column:1/-1;font-size:13.5px}
+  td.src:empty{display:none}
+  .head .actions{width:100%;justify-content:space-between}
+}
+.foot{margin-top:16px;font-size:13.5px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo" aria-label="JBH">__LOGO__</span><span>Prove it pack</span></a>
+    <button class="textbtn" id="signout" type="button" hidden>Sign out</button>
+  </div>
+</header>
+
+<main>
+  <section class="signin" id="signin" hidden>
+    <form id="signinForm">
+      <h1>Prove it sign-ups</h1>
+      <p class="sub">Enter the password to see who has downloaded the pack.</p>
+      <label class="field"><span>Password</span><input id="pw" type="password" autocomplete="current-password" required></label>
+      <label class="check"><input type="checkbox" id="remember" checked> Keep me signed in on this device</label>
+      <button class="btn pri" type="submit">Sign in</button>
+      <p class="err" id="signinErr" role="alert" hidden>That password didn't work. Check it and try again.</p>
+    </form>
+  </section>
+
+  <section class="dash" id="dash" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h1>Prove it sign-ups</h1>
+          <p class="summary" id="summary">Loading…</p>
+        </div>
+        <div class="actions">
+          <span class="updated" id="updated"></span>
+          <button class="btn" id="csv" type="button">
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg>Download CSV</button>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <label class="search"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="5.5"/><path d="M13.5 13.5L17 17"/></svg>
+          <input id="q" type="search" placeholder="Search name, email or company" aria-label="Search sign-ups"></label>
+        <div class="tabs" role="group" aria-label="Filter">
+          <button type="button" data-f="all" aria-pressed="true">Everyone<span class="n" id="nAll"></span></button>
+          <button type="button" data-f="call" aria-pressed="false">Wants to talk<span class="n" id="nCall"></span></button>
+        </div>
+      </div>
+
+      <div class="table">
+        <table>
+          <thead><tr><th>When</th><th>Name</th><th>Company</th><th>Email</th><th>Wants to talk</th><th>Source</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="empty" id="empty" hidden></div>
+      </div>
+      <p class="foot" id="foot"></p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var KEY='jbh-prove-it-leads', SEEN='jbh-prove-it-leads-seen';
+  var $=function(id){return document.getElementById(id)};
+  var pw=null, leads=[], filter='all', lastSeen=0, timer=null;
+
+  function store(){try{return $('remember').checked?localStorage:sessionStorage}catch(e){return null}}
+  function readPw(){try{return localStorage.getItem(KEY)||sessionStorage.getItem(KEY)}catch(e){return null}}
+  function clearPw(){try{localStorage.removeItem(KEY);sessionStorage.removeItem(KEY)}catch(e){}}
+  try{lastSeen=+localStorage.getItem(SEEN)||0}catch(e){}
+
+  function auth(){return {Authorization:'Basic '+btoa('jbh:'+pw)}}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function when(iso){
+    var d=new Date(iso), now=new Date(), mins=Math.round((now-d)/60000);
+    if(mins<1)return 'Just now'; if(mins<60)return mins+' min ago';
+    var t=d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    if(d.toDateString()===now.toDateString())return 'Today, '+t;
+    var y=new Date(now);y.setDate(now.getDate()-1);
+    if(d.toDateString()===y.toDateString())return 'Yesterday, '+t;
+    return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'})+', '+t;
+  }
+  var NAMES={brightonseo:'brightonSEO',linkedin:'LinkedIn',twitter:'X',x:'X',email:'Email',newsletter:'Newsletter',google:'Google',slack:'Slack'};
+  function source(l){
+    var s=l.source?(NAMES[l.source.toLowerCase()]||l.source):'';
+    if(!s&&l.referrer){try{s=new URL(l.referrer).hostname.replace(/^www\./,'')}catch(e){}}
+    return [s,l.campaign].filter(Boolean).join(' / ');
+  }
+  var TICK='<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="Yes"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+
+  function render(){
+    var q=$('q').value.trim().toLowerCase();
+    var today=new Date().toDateString(), weekAgo=Date.now()-7*864e5;
+    var nToday=0,nWeek=0,nCall=0;
+    leads.forEach(function(l){var t=new Date(l.created_at);if(t.toDateString()===today)nToday++;if(+t>=weekAgo)nWeek++;if(l.wants_call)nCall++});
+    $('summary').innerHTML='<b>'+leads.length+'</b> sign-up'+(leads.length===1?'':'s')+'<span class="sep">·</span><b>'+nToday+'</b> today<span class="sep">·</span><b>'+nWeek+'</b> this week<span class="sep">·</span><b>'+nCall+'</b> want to talk';
+    $('nAll').textContent=leads.length; $('nCall').textContent=nCall;
+    var list=leads.filter(function(l){
+      if(filter==='call'&&!l.wants_call)return false;
+      return !q||[l.name,l.email,l.company].join(' ').toLowerCase().indexOf(q)>-1;
+    });
+    $('rows').innerHTML=list.map(function(l){
+      var isNew=lastSeen&&+new Date(l.created_at)>lastSeen;
+      var src=source(l);
+      return '<tr'+(isNew?' class="new"':'')+'><td class="when" title="'+esc(new Date(l.created_at).toLocaleString('en-GB'))+'">'+esc(when(l.created_at))+'</td>'+
+        '<td class="name">'+esc(l.name)+'</td><td class="company">'+esc(l.company)+'</td>'+
+        '<td class="email"><a href="mailto:'+esc(l.email)+'">'+esc(l.email)+'</a></td>'+
+        '<td class="call">'+(l.wants_call?TICK:'')+'</td><td class="src">'+esc(src)+'</td></tr>';
+    }).join('');
+    var empty=$('empty');
+    if(!leads.length){empty.innerHTML='<b>No sign-ups yet</b>New sign-ups appear here as soon as someone downloads the pack.';empty.hidden=false}
+    else if(!list.length){empty.innerHTML='<b>No matches</b>Try a different name, email or company.';empty.hidden=false}
+    else empty.hidden=true;
+    $('foot').textContent=list.length&&list.length!==leads.length?'Showing '+list.length+' of '+leads.length+'.':'';
+  }
+
+  function load(first){
+    if(window.PREVIEW_LEADS){leads=window.PREVIEW_LEADS;done();return Promise.resolve(true)}
+    return fetch('/api/leads?format=json',{headers:auth(),cache:'no-store'}).then(function(r){
+      if(r.status===401)return false;
+      if(!r.ok)throw new Error(r.status);
+      return r.json().then(function(d){leads=d.leads||[];done();return true});
+    }).catch(function(){ $('updated').textContent='Couldn\'t refresh. Retrying shortly.'; return first?null:true; });
+    function done(){
+      render();
+      $('updated').innerHTML='<i></i>Live, updated '+new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+    }
+  }
+
+  function showDash(){
+    $('signin').hidden=true;$('dash').hidden=false;$('signout').hidden=false;
+    clearInterval(timer);timer=setInterval(function(){if(!document.hidden)load()},30000);
+    // Mark everything seen for the next visit, after this one has shown what's new.
+    addEventListener('pagehide',function(){try{if(leads[0])localStorage.setItem(SEEN,+new Date(leads[0].created_at))}catch(e){}});
+  }
+  function showSignin(err){
+    clearInterval(timer);$('dash').hidden=true;$('signout').hidden=true;$('signin').hidden=false;$('signinErr').hidden=!err;$('signinErr').textContent='That password didn\'t work. Check it and try again.';
+    $('pw').value='';$('pw').focus();
+  }
+
+  $('signinForm').addEventListener('submit',function(e){
+    e.preventDefault();pw=$('pw').value;
+    load(true).then(function(ok){
+      if(ok){var s=store();try{s&&s.setItem(KEY,pw)}catch(e){}showDash()}
+      else{showSignin(true);if(ok===null)$('signinErr').textContent='Couldn\'t reach the server. Check your connection and try again.'}
+    });
+  });
+  $('signout').addEventListener('click',function(){clearPw();pw=null;leads=[];showSignin(false)});
+  $('q').addEventListener('input',render);
+  document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener('click',function(){
+    filter=b.dataset.f;document.querySelectorAll('.tabs button').forEach(function(x){x.setAttribute('aria-pressed',x===b)});render();
+  })});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden&&pw)load()});
+  $('csv').addEventListener('click',function(){
+    fetch('/api/leads',{headers:auth()}).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){
+      var a=document.createElement('a');a.href=URL.createObjectURL(b);
+      a.download='prove-it-sign-ups-'+new Date().toISOString().slice(0,10)+'.csv';document.body.appendChild(a);a.click();a.remove();
+    }).catch(function(){$('updated').textContent='Download failed. Try again.'});
+  });
+
+  if(window.PREVIEW_LEADS){pw='preview';load(true);showDash();return}
+  pw=readPw();
+  if(pw)load(true).then(function(ok){if(ok)showDash();else if(ok===null)showSignin(false);else{clearPw();showSignin(false)}});
+  else showSignin(false);
+})();
+</script>
+</body>
+</html>

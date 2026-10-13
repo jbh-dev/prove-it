@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prove it pack · JBH</title>
+<meta name="description" content="A free digital PR toolkit for measuring AI visibility: Jane Hunt's brightonSEO slides, plus the Prompt Research and Prompt Framework worksheets.">
+<meta property="og:title" content="Prove it. A practical digital PR toolkit for measuring AI visibility">
+<meta property="og:description" content="Free from JBH: Jane Hunt's brightonSEO slides, plus the Prompt Research and Prompt Framework worksheets.">
+<meta property="og:image" content="https://proveit.jbh.co.uk/assets/jane-stage.jpg">
+<meta property="og:url" content="https://proveit.jbh.co.uk/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://proveit.jbh.co.uk/">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/ProximaNova-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/ProximaNova-Light.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Proxima Nova";font-weight:300;font-style:normal;font-display:swap;src:url(/assets/fonts/ProximaNova-Light.woff2) format("woff2")}
+@font-face{font-family:"Proxima Nova";font-weight:700;font-style:normal;font-display:swap;src:url(/assets/fonts/ProximaNova-Bold.woff2) format("woff2")}
+
+:root{
+  --paper:#ffffff; --tint:#f7f7f8; --surface:#ffffff; --sunk:#f1f1f3;
+  --ink:#111113; --ink2:#3f3f46; --muted:#6c6c75; --faint:#a6a6ae;
+  --line:#ebebee; --line2:#dcdce1;
+  --pink:#ED4C99; --pink-ink:#c92f7a; --pink-wash:rgba(237,76,153,.08);
+  --grad:linear-gradient(100deg,#ED4C99 0%,#F18778 55%,#F4BF54 100%);
+  --bad:#c03535;
+  --font:"Proxima Nova","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --r:14px; --rb:10px; --wrap:1120px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111013; --tint:#151317; --surface:#1a181d; --sunk:#141216;
+  --ink:#f2eff4; --ink2:#c9c3ce; --muted:#938d98; --faint:#5c5761;
+  --line:#26232a; --line2:#36323b; --pink:#f06aa8; --pink-ink:#f58cbd; --pink-wash:rgba(240,106,168,.1);
+  --bad:#ef6b6b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111013; --tint:#151317; --surface:#1a181d; --sunk:#141216;
+  --ink:#f2eff4; --ink2:#c9c3ce; --muted:#938d98; --faint:#5c5761;
+  --line:#26232a; --line2:#36323b; --pink:#f06aa8; --pink-ink:#f58cbd; --pink-wash:rgba(240,106,168,.1);
+  --bad:#ef6b6b; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:300 17px/1.6 var(--font);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3,b,strong{font-weight:700;font-style:normal}
+h1,h2,h3{margin:0;letter-spacing:-.02em;line-height:1.1;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--pink);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+@media (max-width:640px){.wrap{padding:0 16px}}
+.muted{color:var(--muted)}
+
+/* Buttons: one soft rounded-rectangle shape */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:50px;padding:0 22px;border-radius:var(--rb);border:1px solid var(--line2);background:var(--surface);color:var(--ink);font:700 16px/1 var(--font);text-decoration:none;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+.btn:hover{border-color:var(--ink2)}
+.btn.pri{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn.pri:hover{background:var(--ink2);border-color:var(--ink2)}
+.btn:disabled{opacity:.6;cursor:default}
+.btn svg{width:18px;height:18px;flex:none}
+.link{color:var(--ink);text-decoration:none;font-weight:700;border-bottom:1px solid var(--line2);padding-bottom:1px;transition:border-color .15s}
+.link:hover{border-color:var(--pink)}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.scrolled{border-bottom-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:inline-flex;color:var(--ink);width:58px;padding:6px 0}
+.logo svg{width:100%;height:auto;display:block}
+.top nav{display:flex;align-items:center;gap:28px;font-size:15px}
+.top nav a{text-decoration:none;color:var(--muted);transition:color .15s}
+.top nav a:hover{color:var(--ink)}
+.top .btn{height:40px;padding:0 16px;font-size:14px}
+@media (max-width:640px){.top nav .hide-s{display:none}}
+
+/* Hero */
+.hero{padding:72px 0 96px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:15px;color:var(--muted);margin-bottom:28px}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--pink);flex:none}
+.hero h1{font-size:clamp(64px,9vw,112px);letter-spacing:-.045em;line-height:.92}
+.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:clamp(22px,2.4vw,28px);font-weight:700;letter-spacing:-.015em;line-height:1.2;margin:28px 0 24px;max-width:520px}
+.hero .lede{color:var(--ink2);max-width:520px}
+.hero .lede + .lede{margin-top:14px}
+.hero .actions{display:flex;align-items:center;gap:20px;margin-top:36px;flex-wrap:wrap}
+.hero .note{font-size:15px;color:var(--muted)}
+.talk{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);font-size:15px;color:var(--muted);max-width:520px}
+.talk em{font-style:normal;color:var(--ink);font-weight:700}
+
+.photo{margin:0}
+.photo .frame{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:1/1;max-width:100%;background:var(--sunk)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:74% 50%;display:block}
+.photo figcaption{margin-top:14px;font-size:14px;color:var(--muted);text-align:center}
+.photo .ph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:15px;background:var(--sunk)}
+
+@media (max-width:900px){
+  .hero{padding:40px 0 72px}
+  .hero .wrap{grid-template-columns:1fr;gap:48px}
+  .photo{order:-1}
+  .photo .frame{aspect-ratio:1080/504}
+  .photo img{object-position:50% 50%}
+}
+
+/* Sections */
+section{padding:112px 0}
+section.tint{background:var(--tint)}
+.head{max-width:680px;margin-bottom:56px}
+.head.center{margin-left:auto;margin-right:auto;text-align:center}
+h2{font-size:clamp(34px,4.4vw,52px);letter-spacing:-.03em}
+.head p{margin-top:20px;color:var(--ink2);font-size:19px}
+@media (max-width:640px){section{padding:80px 0}.head{margin-bottom:40px}}
+
+/* Questions */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+.split .head{margin-bottom:0}
+.qs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.qs li{display:grid;grid-template-columns:36px 1fr;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line);font-size:19px;color:var(--ink)}
+.qs li span{font-size:14px;color:var(--faint);font-variant-numeric:tabular-nums}
+.qs-foot{margin-top:28px;color:var(--ink2)}
+@media (max-width:900px){.split{grid-template-columns:1fr;gap:40px}}
+
+/* Inside: three cards that line up */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--line2)}
+.card .thumb{height:220px;border-radius:10px;background:var(--sunk);display:grid;place-items:center;margin-bottom:28px;overflow:hidden}
+.cover{display:block;max-width:100%;box-shadow:0 1px 2px rgba(17,17,19,.08),0 14px 30px -12px rgba(17,17,19,.32)}
+.slide-cover{width:84%;height:auto;border-radius:6px}
+.doc-cover{height:176px;width:auto;border-radius:4px}
+.card h3{font-size:22px;letter-spacing:-.015em}
+.card .body{margin-top:12px}
+.card p + p{margin-top:10px}
+.card p{color:var(--ink2);font-size:16px}
+
+.card .meta{align-self:end;padding-top:24px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.card .meta svg{width:16px;height:16px}
+@media (max-width:900px){.cards{grid-template-columns:1fr}}
+
+/* Proof */
+.figures{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.figures div{padding:32px 0;text-align:center}
+.figures div + div{border-left:1px solid var(--line)}
+.figures b{display:block;font-size:44px;letter-spacing:-.03em;line-height:1}
+.figures span{display:block;margin-top:10px;color:var(--muted);font-size:16px}
+.lesson{margin:72px auto 0;max-width:820px;text-align:center}
+.lesson blockquote{margin:0;font-size:clamp(26px,3.2vw,36px);font-weight:700;letter-spacing:-.02em;line-height:1.2;text-wrap:balance}
+.lesson blockquote::before{content:"";display:block;width:40px;height:3px;border-radius:2px;background:var(--grad);margin:0 auto 28px}
+.lesson p{margin:28px auto 0;color:var(--ink2);max-width:640px}
+.lesson p + p{margin-top:14px}
+.cases{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:64px}
+.case{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:32px}
+.case h3{font-size:22px;letter-spacing:-.015em}
+.case .what{margin-top:6px;color:var(--muted);font-size:15px}
+.case > p:not(.what){margin-top:16px;color:var(--ink2);font-size:16px}
+.case dl{margin:auto 0 0;padding-top:24px;display:grid;gap:0}
+.case dl div{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.case dt{color:var(--muted);font-size:15px}
+.case dd{margin:0;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.case dd span{font-weight:300;color:var(--muted);font-size:15px;margin:0 4px}
+@media (max-width:760px){.cases{grid-template-columns:1fr;margin-top:48px}.case{padding:24px 20px}}
+@media (max-width:640px){.figures b{font-size:34px}.figures span{font-size:14px}.figures div{padding:24px 6px}}
+
+/* Steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
+.steps li{counter-increment:s;padding-top:28px;border-top:1px solid var(--line2)}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:var(--pink-wash);color:var(--pink-ink);font-weight:700;font-size:16px;margin-bottom:24px}
+.steps h3{font-size:22px;letter-spacing:-.015em}
+.steps p{margin-top:12px;color:var(--ink2);font-size:16px}
+.steps p.uses{margin-top:14px;font-size:14px;color:var(--muted)}
+.steps-foot{margin-top:48px;color:var(--muted);max-width:640px}
+@media (min-width:901px){.steps li{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0;align-content:start}}
+@media (max-width:900px){.steps{grid-template-columns:1fr;gap:8px}}
+
+/* Form */
+.get{display:grid;grid-template-columns:.9fr 1.1fr;gap:72px;align-items:center}
+.get .head{margin-bottom:0}
+.get .head ul{list-style:none;padding:0;margin:32px 0 0;display:grid;gap:14px}
+.get .head ul li{display:flex;align-items:center;gap:14px;font-size:17px}
+.tick{width:22px;height:22px;border-radius:6px;border:1px solid var(--line2);display:grid;place-items:center;flex:none}
+.tick svg{width:13px;height:13px;color:var(--pink)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:40px;box-shadow:0 1px 2px rgba(17,17,19,.03),0 30px 60px -30px rgba(17,17,19,.18)}
+.field{display:block;margin-bottom:18px}
+.field span{display:block;font-size:15px;font-weight:700;margin-bottom:8px}
+.field input{width:100%;height:52px;padding:0 16px;border-radius:var(--rb);border:1px solid var(--line2);background:var(--paper);color:var(--ink);font:300 17px var(--font);transition:border-color .15s,box-shadow .15s}
+.field input::placeholder{color:var(--faint)}
+.field input:focus{outline:none;border-color:var(--pink);box-shadow:0 0 0 4px var(--pink-wash)}
+.field input[aria-invalid="true"]{border-color:var(--bad)}
+.field .err{display:none;font-size:14px;color:var(--bad);margin-top:6px}
+.field input[aria-invalid="true"] + .err{display:block}
+.check{display:flex;gap:12px;align-items:flex-start;font-size:15px;color:var(--ink2);margin:6px 0 24px;cursor:pointer}
+.check input{appearance:none;-webkit-appearance:none;width:20px;height:20px;margin:1px 0 0;border:1px solid var(--line2);border-radius:5px;background:var(--paper);flex:none;display:grid;place-items:center;cursor:pointer}
+.check input::after{content:"";width:9px;height:5px;border-left:2px solid var(--pink);border-bottom:2px solid var(--pink);transform:rotate(-45deg) translate(1px,-1px);opacity:0;transition:opacity .12s}
+.check input:checked::after{opacity:1}
+.check input:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.panel .btn{width:100%}
+.legal{margin-top:16px;font-size:13.5px;color:var(--muted);text-align:center;line-height:1.5}
+.legal a{color:var(--ink2)}
+.hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.formerr{display:none;margin-top:14px;font-size:15px;color:var(--bad);text-align:center}
+.formerr.show{display:block}
+
+.done{display:none}
+.panel.sent form{display:none}
+.panel.sent .done{display:block}
+.done h3{font-size:28px;letter-spacing:-.02em}
+.done > p{margin-top:10px;color:var(--ink2)}
+.files{list-style:none;padding:0;margin:28px 0 0;border-top:1px solid var(--line)}
+.files li{border-bottom:1px solid var(--line)}
+.files a{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:14px;padding:16px 4px;text-decoration:none;color:var(--ink);transition:background .15s}
+.files a:hover{background:var(--tint)}
+.files .ic{width:40px;height:40px;border-radius:10px;background:var(--sunk);display:grid;place-items:center;color:var(--muted)}
+.files .ic svg{width:18px;height:18px}
+.files b{display:block;font-size:16px}
+.files small{font-size:14px;color:var(--muted)}
+.files .dl{color:var(--muted);display:flex}
+.files .dl svg{width:18px;height:18px}
+.done .btn{margin-top:24px;width:100%}
+.after{margin-top:18px;text-align:center;font-size:15px;color:var(--muted)}
+@media (max-width:900px){.get{grid-template-columns:1fr;gap:40px}.panel{padding:28px 20px}}
+
+/* Help */
+.help{text-align:center}
+.help .head{margin-bottom:36px}
+
+footer{padding:40px 0;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer .logo{width:44px;padding:10px 0}
+footer nav{display:flex;gap:24px}
+footer a{text-decoration:none;padding:8px 0}
+footer a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="logo" href="https://jbh.co.uk/" aria-label="JBH home"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 284.4"><g fill="currentColor"><path d="M176.7,0h-65h-3L49.7,64.1h56.1v113c0,25.9-11.4,39.1-29.4,39.1c-15.8,0-27.6-9.6-40.1-26L0,237.3 c18,26.7,35.8,47.1,80.7,47.1c29.4,0,53.7-10,70.7-28.3c17.3-18.8,25.4-43.5,25.4-78.6V0.2V0z"/><polygon points="617,7.1 617,106.8 524.7,106.8 524.7,7.1 453.7,7.1 453.7,270.4 524.7,270.4 524.7,170.8 617,170.8 617,249.4 688,181.2 688,7.1 "/><path d="M354.2,183.2c0,16.2-7.5,23.2-29.2,23.2h-56v-49.8h55.3c23.9,0,30,10.8,30,25.8L354.2,183.2L354.2,183.2z M269,56.9h50.5c22.9,0,34.7,13.6,34.7,28.7v0.8c0,16.3-13,27.4-36.3,27.4H269V56.9z M384.3,130.1c23.5-10.2,41-28.3,41-58.9V68 c0-18.5-6.4-32.9-16.9-43.6C393,8.5,369.7,0,336.7,0H205.1v135.2l0,0l0,135.2h132.2c62.6,0,95.1-28.2,95.1-74.6v-1.1 c0-35.9-16.2-54-48.4-64.6"/></g></svg>
+</a>
+    <nav aria-label="Page">
+      <a class="hide-s" href="#inside">What's inside</a>
+      <a class="hide-s" href="#help">GEO support</a>
+      <a class="btn pri" href="#get">Get the free pack</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow"><i></i>Free from JBH, as seen at brightonSEO</div>
+        <h1 id="h1">Prove <span>it.</span></h1>
+        <p class="sub">A practical digital PR toolkit for measuring AI visibility</p>
+        <p class="lede">Is your brand appearing in the AI answers that matter to your customers? And can you explain how your digital PR activity contributes?</p>
+        <p class="lede">Download JBH's free <b>Prove it pack</b> to identify commercially relevant prompts, establish a visibility baseline and report progress without overclaiming.</p>
+        <div class="actions">
+          <a class="btn pri" href="#get">Download the free pack
+            <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg></a>
+          <span class="note">Three PDFs, free</span>
+        </div>
+        <p class="talk">Created to accompany Jane Hunt's brightonSEO talk: <em>Prove it: A Digital PR Playbook for Winning AI Citations and Reporting GEO Impact.</em></p>
+      </div>
+      <figure class="photo">
+        <div class="frame"><img src="/assets/jane-stage.jpg" alt="Jane Hunt speaking at brightonSEO" width="1080" height="504" fetchpriority="high"></div>
+        <figcaption>Jane Hunt on stage at brightonSEO, October 2026</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="tint" aria-labelledby="h-foundation">
+    <div class="wrap split">
+      <div class="head">
+        <h2 id="h-foundation">Give your next GEO report a stronger foundation</h2>
+        <p>Coverage and links tell you what your PR activity achieved. Understanding its contribution to AI visibility means asking further questions.</p>
+      </div>
+      <div>
+        <ol class="qs">
+          <li><span>01</span>Which customer questions does your brand appear for?</li>
+          <li><span>02</span>Is it mentioned, cited or recommended?</li>
+          <li><span>03</span>How does its visibility compare with competitors?</li>
+          <li><span>04</span>What changed after your activity?</li>
+          <li><span>05</span>What can you confidently tell stakeholders?</li>
+        </ol>
+        <p class="qs-foot">The Prove it pack gives you a practical starting point for answering those questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="inside" aria-labelledby="h-inside">
+    <div class="wrap">
+      <div class="head center">
+        <h2 id="h-inside">What's inside?</h2>
+        <p>Jane's slides and two worksheets. Start with Prompt Research, then carry your chosen prompts into the Prompt Framework.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="thumb"><img class="cover slide-cover" src="/assets/covers/slides.jpg" alt="Title slide: Prove it, a digital PR playbook, by Jane Hunt" width="520" height="292" loading="lazy"></div>
+          <h3>The brightonSEO slides</h3>
+          <div class="body">
+          <p>All 71 slides from Jane's talk, built around the three levers that move AI visibility: prompts, publishers and proof.</p>
+          <p>Includes the client examples, a publisher workflow and a three-layer reporting model, with what you can and can't claim.</p>
+          </div>
+          <div class="meta"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z M9.5 1.5V5H13"/></svg>71 slides, PDF</div>
+        </article>
+        <article class="card">
+          <div class="thumb"><img class="cover doc-cover" src="/assets/covers/prompt-research.jpg" alt="First page of the Prompt Research worksheet" width="320" height="453" loading="lazy"></div>
+          <h3>Prompt Research</h3>
+          <div class="body">
+          <p>Find the customer questions worth tracking. Capture real wording from reviews, sales calls and forums, then turn it into natural prompts that don't steer the answer.</p>
+          <p>Work through four steps: collect, classify, prioritise and transfer.</p>
+          </div>
+          <div class="meta"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z M9.5 1.5V5H13"/></svg>4-page worksheet, PDF</div>
+        </article>
+        <article class="card">
+          <div class="thumb"><img class="cover doc-cover" src="/assets/covers/prompt-framework.jpg" alt="First page of the Prompt Framework worksheet" width="320" height="453" loading="lazy"></div>
+          <h3>Prompt Framework</h3>
+          <div class="body">
+          <p>Set the commercial goal, fix a core prompt set and agree a tracking method you can repeat every reporting period.</p>
+          <p>Code each answer as mentioned, recommended or cited, then report the change with the limits of the evidence.</p>
+          </div>
+          <div class="meta"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z M9.5 1.5V5H13"/></svg>5-page worksheet, PDF</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint" aria-labelledby="h-proof">
+    <div class="wrap">
+      <div class="head center">
+        <h2 id="h-proof">Built from real client work</h2>
+        <p>In the work shared at brightonSEO, JBH tracked commercially relevant prompts for one brand.</p>
+      </div>
+      <div class="figures" role="list">
+        <div role="listitem"><b>50</b><span>prompts tracked</span></div>
+        <div role="listitem"><b>4</b><span>products</span></div>
+        <div role="listitem"><b>4</b><span>AI platforms</span></div>
+      </div>
+      <div class="lesson">
+        <blockquote>A strong overall visibility score can hide gaps in important customer conversations.</blockquote>
+        <p>A product can gain visibility in comparison questions while losing ground in questions about the problem it solves. Looking beyond a single headline number helps you see where to focus next.</p>
+        <p>That approach runs through this pack: define the questions, establish the baseline and examine what changes.</p>
+      </div>
+      <div class="cases">
+        <article class="case">
+          <h3>What moved</h3>
+          <p class="what">A plant sterol supplement</p>
+          <p>Expert-led coverage on cholesterol and the Portfolio Diet earned 8 regional placements and 25 links to the product page.</p>
+          <dl>
+            <div><dt>Domain citations</dt><dd>172 <span>to</span> 225</dd></div>
+            <div><dt>Brand coverage across tracked prompts</dt><dd>22% <span>to</span> 25%</dd></div>
+          </dl>
+        </article>
+        <article class="case">
+          <h3>What the headline hid</h3>
+          <p class="what">A lactase supplement</p>
+          <p>It led with 41% share of voice and ranked first, yet lost ground on hidden-dairy and digestive-discomfort questions.</p>
+          <dl>
+            <div><dt>Share of voice</dt><dd>41%, ranked 1st</dd></div>
+            <div><dt>Prompt coverage</dt><dd>32 <span>to</span> 28</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-steps">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="h-steps">Put it to work in your next brief</h2>
+        <p>Start with three steps.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Choose your priority customer questions</h3><p>Focus on the prompts that relate to your products, services and buying decisions.</p><p class="uses">Prompt Research</p></li>
+        <li><h3>Record your starting position</h3><p>Establish where your brand and competitors appear before new activity begins.</p><p class="uses">Prompt Framework, pages 1 to 4</p></li>
+        <li><h3>Report movement with context</h3><p>Explain what changed, which activity may have contributed and what the evidence cannot establish.</p><p class="uses">Prompt Framework, page 5</p></li>
+      </ol>
+      <p class="steps-foot">The pack is designed for digital PR, SEO and marketing teams that want to make GEO reporting more useful, and easier to explain.</p>
+    </div>
+  </section>
+
+  <section class="tint" id="get" aria-labelledby="h-get">
+    <div class="wrap get">
+      <div class="head">
+        <h2 id="h-get">Download the free Prove it pack</h2>
+        <p>Get Jane's slides and both worksheets to help plan your next campaign and strengthen your next report.</p>
+        <ul>
+          <li><span class="tick"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5l2.5 2.5L11 4.5"/></svg></span>Jane Hunt's brightonSEO slides</li>
+          <li><span class="tick"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5l2.5 2.5L11 4.5"/></svg></span>Prompt Research worksheet</li>
+          <li><span class="tick"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5l2.5 2.5L11 4.5"/></svg></span>Prompt Framework worksheet</li>
+        </ul>
+      </div>
+
+      <div class="panel" id="panel" aria-live="polite">
+        <form id="lead" novalidate>
+          <label class="field"><span>Full name</span>
+            <input name="name" autocomplete="name" required maxlength="120" placeholder="Alex Morgan">
+            <small class="err">Please enter your name.</small></label>
+          <label class="field"><span>Work email</span>
+            <input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="alex@company.com">
+            <small class="err">Please enter a valid email address.</small></label>
+          <label class="field"><span>Company</span>
+            <input name="company" autocomplete="organization" required maxlength="160" placeholder="Company name">
+            <small class="err">Please enter your company.</small></label>
+          <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+          <label class="check"><input type="checkbox" name="talk"> I'd also like to talk to JBH about GEO support for my brand</label>
+          <button class="btn pri" type="submit">Send me the free pack</button>
+          <p class="formerr" id="formerr" role="alert">Something went wrong. Please try again.</p>
+          <p class="legal">We'll use your details to send you the pack and follow up about JBH's work. See our <a href="https://jbh.co.uk/privacy-policy/">privacy policy</a>.</p>
+        </form>
+
+        <div class="done" tabindex="-1" id="done">
+          <h3>Your pack is ready</h3>
+          <p>Thanks<span id="who"></span>. Download each file below.</p>
+          <ul class="files">
+            <li><a href="/pack/JBH-Prove-it-brightonSEO-slides.pdf" download><span class="ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z M9.5 1.5V5H13"/></svg></span><span><b>Jane Hunt's brightonSEO slides</b><small>71 slides, PDF, 4.6 MB</small></span><span class="dl"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg></span></a></li>
+            <li><a href="/pack/JBH-Prove-it-Prompt-Research.pdf" download><span class="ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z M9.5 1.5V5H13"/></svg></span><span><b>Prompt Research</b><small>4-page worksheet, PDF</small></span><span class="dl"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg></span></a></li>
+            <li><a href="/pack/JBH-Prove-it-Prompt-Framework.pdf" download><span class="ic"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z M9.5 1.5V5H13"/></svg></span><span><b>Prompt Framework</b><small>5-page worksheet, PDF</small></span><span class="dl"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3v10m0 0l-4-4m4 4l4-4M4 16h12"/></svg></span></a></li>
+          </ul>
+          <a class="btn pri" href="/pack/JBH-Prove-it-pack.zip" download>Download all three (ZIP)</a>
+          <p class="after">Want help applying it to your brand? <a class="link" href="#help">Talk to JBH</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="help" id="help" aria-labelledby="h-help">
+    <div class="wrap">
+      <div class="head center">
+        <h2 id="h-help">Want help applying it to your brand?</h2>
+        <p>JBH can help you identify priority prompts, review your AI visibility and build a digital PR plan around the gaps. Bring your current report or your biggest GEO question, and we can discuss a useful next step.</p>
+      </div>
+      <a class="btn pri" href="mailto:jane@jbh.co.uk?subject=GEO%20support%20(Prove%20it%20pack)">Discuss GEO support with JBH</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="https://jbh.co.uk/" aria-label="JBH home"><svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 688 284.4"><g fill="currentColor"><path d="M176.7,0h-65h-3L49.7,64.1h56.1v113c0,25.9-11.4,39.1-29.4,39.1c-15.8,0-27.6-9.6-40.1-26L0,237.3 c18,26.7,35.8,47.1,80.7,47.1c29.4,0,53.7-10,70.7-28.3c17.3-18.8,25.4-43.5,25.4-78.6V0.2V0z"/><polygon points="617,7.1 617,106.8 524.7,106.8 524.7,7.1 453.7,7.1 453.7,270.4 524.7,270.4 524.7,170.8 617,170.8 617,249.4 688,181.2 688,7.1 "/><path d="M354.2,183.2c0,16.2-7.5,23.2-29.2,23.2h-56v-49.8h55.3c23.9,0,30,10.8,30,25.8L354.2,183.2L354.2,183.2z M269,56.9h50.5c22.9,0,34.7,13.6,34.7,28.7v0.8c0,16.3-13,27.4-36.3,27.4H269V56.9z M384.3,130.1c23.5-10.2,41-28.3,41-58.9V68 c0-18.5-6.4-32.9-16.9-43.6C393,8.5,369.7,0,336.7,0H205.1v135.2l0,0l0,135.2h132.2c62.6,0,95.1-28.2,95.1-74.6v-1.1 c0-35.9-16.2-54-48.4-64.6"/></g></svg>
+</a>
+    <span>Unmissable brands. Undeniable results.</span>
+    <nav aria-label="Footer"><a href="https://jbh.co.uk/">jbh.co.uk</a><a href="https://jbh.co.uk/privacy-policy/">Privacy</a><span>© Jackson Blason Hunt Ltd</span></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var top=document.getElementById('top');
+  addEventListener('scroll',function(){top.classList.toggle('scrolled',scrollY>8)},{passive:true});
+
+  var form=document.getElementById('lead'), panel=document.getElementById('panel');
+  var err=document.getElementById('formerr'), btn=form.querySelector('button[type=submit]');
+  var EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var KEY='jbh-prove-it';
+
+  function show(name){
+    document.getElementById('who').textContent=name?', '+name.split(' ')[0]:'';
+    panel.classList.add('sent');
+  }
+  try{var saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&saved.name)show(saved.name)}catch(e){}
+
+  function check(input){
+    var v=input.value.trim(), ok=input.name==='email'?EMAIL.test(v):v.length>0;
+    input.setAttribute('aria-invalid',ok?'false':'true');
+    return ok;
+  }
+  form.querySelectorAll('input[required]').forEach(function(i){
+    i.addEventListener('blur',function(){if(i.value)check(i)});
+    i.addEventListener('input',function(){if(i.getAttribute('aria-invalid')==='true')check(i)});
+  });
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    err.classList.remove('show');
+    var bad=[].filter.call(form.querySelectorAll('input[required]'),function(i){return !check(i)});
+    if(bad.length){bad[0].focus();return}
+    var q=new URLSearchParams(location.search);
+    var data={
+      name:form.name.value.trim(), email:form.email.value.trim(), company:form.company.value.trim(),
+      talk:form.talk.checked, website:form.website.value,
+      source:q.get('utm_source')||'', medium:q.get('utm_medium')||'', campaign:q.get('utm_campaign')||'',
+      referrer:document.referrer||''
+    };
+    btn.disabled=true; btn.textContent='Sending…';
+    function ok(){
+      try{localStorage.setItem(KEY,JSON.stringify({name:data.name}))}catch(e){}
+      show(data.name); document.getElementById('done').focus({preventScroll:true});
+    }
+    if(window.PREVIEW){setTimeout(ok,500);return}
+    fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){if(!r.ok)throw new Error(r.status);ok()})
+      .catch(function(){err.classList.add('show')})
+      .finally(function(){btn.disabled=false;btn.textContent='Send me the free pack'});
+  });
+})();
+</script>
+</body>
+</html>
