@@ -47,7 +47,7 @@ The code lives in GitHub at `jbh-dev/prove-it`, and Cloudflare publishes every p
 4. **Password:** go to **prove-it > Settings > Variables and Secrets > Add**. Set the type to Secret, the name to `LEADS_PASSWORD`, and the value to the password Jane will use.
 5. **Redeploy:** go to **Deployments**, open the latest deployment, then click **... > Retry deployment** so steps 3 and 4 take effect.
 
-The site is now live at `https://prove-it.pages.dev`. Cloudflare may add a suffix if that name is taken.
+The site is now live at `https://prove-it-e8u.pages.dev`. Cloudflare may add a suffix if that name is taken.
 
 **Command-line alternative:** rename `wrangler.example.toml` to `wrangler.toml` and run these commands:
 
@@ -70,7 +70,7 @@ In Cloudflare, open **Workers & Pages > prove-it > Custom domains > Set up a cus
 
 | Type | Name / Host | Value / Points to | TTL |
 |---|---|---|---|
-| CNAME | `proveit` | `prove-it.pages.dev` | 1 hour (or Auto) |
+| CNAME | `proveit` | `prove-it-e8u.pages.dev` | 1 hour (or Auto) |
 
 - Use the exact `*.pages.dev` address Cloudflare shows for your project as the value.
 - Most panels want just `proveit` as the name, not the full `proveit.jbh.co.uk`.
@@ -80,11 +80,11 @@ In Cloudflare, open **Workers & Pages > prove-it > Custom domains > Set up a cus
 ### Check it works
 
 ```bash
-dig +short CNAME proveit.jbh.co.uk      # should print prove-it.pages.dev.
+dig +short CNAME proveit.jbh.co.uk      # should print prove-it-e8u.pages.dev.
 curl -sI https://proveit.jbh.co.uk | head -1   # should print HTTP/2 200
 ```
 
-Or open https://www.whatsmydns.net/#CNAME/proveit.jbh.co.uk and check that the results show `prove-it.pages.dev`.
+Or open https://www.whatsmydns.net/#CNAME/proveit.jbh.co.uk and check that the results show `prove-it-e8u.pages.dev`.
 
 Finally, submit the form once with your own details, download a file, then open `https://proveit.jbh.co.uk/leads`. Sign in with the `LEADS_PASSWORD`, and your test sign-up should be at the top.
 
