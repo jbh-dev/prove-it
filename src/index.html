@@ -484,7 +484,7 @@ footer a:hover{color:var(--ink)}
       source:q.get('utm_source')||'', medium:q.get('utm_medium')||'', campaign:q.get('utm_campaign')||'',
       referrer:document.referrer||''
     };
-    btn.disabled=true; btn.textContent='Sending…';
+    btn.disabled=true; btn.textContent='One moment…';
     function ok(){
       try{localStorage.setItem(KEY,JSON.stringify({name:data.name}))}catch(e){}
       show(data.name); document.getElementById('done').focus({preventScroll:true});

@@ -113,5 +113,5 @@ npm test
 
 - The PDFs are a soft gate. The form shows the links, but anyone with a direct link can still open the files. That's normal for a free pack, and `robots.txt` keeps search engines out of `/pack/`.
 - Spam protection is a hidden honeypot field. If bots get through, add Cloudflare Turnstile (free).
-- "Discuss GEO support with JBH" opens an email to jane@jbh.co.uk. Swap in the jbh.co.uk contact page URL if you'd prefer.
+- "Discuss GEO support with JBH" opens an email to hello@jbh.co.uk. Swap in the jbh.co.uk contact page URL if you'd prefer.
 - Fonts are the Proxima Nova Light and Bold web fonts already used in the Hub. Extrabold isn't in the brand folder, so titles use Bold. Drop in `ProximaNova-Extrabold.woff2` and switch the headings to weight 800 to match the brand exactly.
